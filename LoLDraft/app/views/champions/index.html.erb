@@ -1,0 +1,23 @@
+<h1>Listing champions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @champions.each do |champion| %>
+      <tr>
+        <td><%= link_to champion.name, champion %>
+			<%= render champion %>
+		</td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

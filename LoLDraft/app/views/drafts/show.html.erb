@@ -1,0 +1,33 @@
+
+<div class = "jumbotron">
+	<div class = "team_list">
+		<% if @draft.teams.first == @draft.team_turn %>	
+		<div class = "picking_team">
+		<%else%>
+		<div class = "team">
+		<% end %>
+			<h1>Team 1</h1>
+			<%= render @draft.teams.first %>
+		</div>
+		<% if @draft.teams.last == @draft.team_turn %>	
+		<div class = "picking_team">
+		<%else%>
+		<div class = "team">
+		<% end %>
+			<h1>Team 2</h1>
+			<%= render @draft.teams.last %>
+		</div>
+	</div>
+</div>
+
+<div class = "remaining_champions">
+	<h1>Remaining Champions</h1>
+	<% @draft.champions.each do |champ|%>
+	<div>
+		<%= link_to champ.name, pick_champion_draft_champion_path(@draft, champ)%>
+		<%= render champ %>
+	</div>
+	<% end %>
+</div>
+
+

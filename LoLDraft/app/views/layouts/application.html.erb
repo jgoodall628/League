@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LoLDraft</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	
+<%= link_to "New Draft", new_draft_path %>
+<%= link_to "Champions", champions_path %>
+
+<% if notice %>
+	<p><%= notice%><p>
+<%end%>
+<%= yield %>
+
+</body>
+</html>
