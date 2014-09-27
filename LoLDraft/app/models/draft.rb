@@ -3,22 +3,22 @@ class Draft < ActiveRecord::Base
   has_many :teams 
   
   
-  def pick_champion champ
+  def select_champion champ
       self.champions.delete(champ)
-      team_turn.select(champ)
       self.save
-   
   end
-  
-  def team_turn
-    teams.first.champions.length > teams.last.champions.length ? teams.last : teams.first
+  def picking_team
+    teams.inject(teams.first) {|min, team| team.champions.length < min.champions.length ? min = team : min}
   end
+  #def team_turn
+    #teams.first.champions.length > teams.last.champions.length ? teams.last : teams.first
+    #end
   def unpick_champion champ
     champions << champ
     self.save
   end
-  def can_pick?
-    !team_turn.team_full?
+  def full_teams?
+    teams.all? {|team| team.team_full? }
   end
   
     

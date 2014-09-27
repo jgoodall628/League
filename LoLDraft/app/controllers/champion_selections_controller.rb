@@ -5,24 +5,12 @@ class ChampionSelectionsController < ApplicationController
     @team = set_team
     @picked = set_picked
     
-    if @picked == true
-      unless @team.picks_full?
-        @champ_select = ChampionSelection.new(team: @team, champion: @champion, picked: true)
-        @champ_select.save
-        @draft.select_champion([@champion])
+    if can_select?(@team, @picked)
+        select_champ(@team, @champion, @picked)
+        remove_champ_from_draft_list(@champion)
         redirect_to  @draft
-      else
-        redirect_to @draft, notice: "Picks Full"
-      end
     else
-      unless @team.bans_full?
-        @champ_select = ChampionSelection.new(team: @team, champion: @champion, picked: false)
-        @champ_select.save
-        @draft.select_champion([@champion]) 
-        redirect_to @draft
-      else
-        redirect_to @draft, notice: "Bans Full"
-      end
+        redirect_to @draft, notice: "Cannot Select"
     end
     
   end
@@ -39,6 +27,18 @@ class ChampionSelectionsController < ApplicationController
     Team.find(params[:team_id])
   end
   def set_picked
-    params[:picked]
+    #converts from string to boolean along with setting value
+    params[:picked] == "true"
+   
+  end
+  def select_champ(team, champ, pick_or_ban)
+    @selection = ChampionSelection.new(team: team, champion: champ, picked: pick_or_ban)
+    @selection.save
+  end
+  def remove_champ_from_draft_list champ
+    @draft.select_champion([champ]) 
+  end
+  def can_select? (team, pick_or_ban)
+    pick_or_ban ? team.can_pick? : team.can_ban?
   end
 end

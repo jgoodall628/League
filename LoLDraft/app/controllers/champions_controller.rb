@@ -12,18 +12,6 @@ class ChampionsController < ApplicationController
   def show
     @champion = set_champion
   end
-
-  
-  def pick_champion
-    @champion = set_champion
-    @draft = set_draft
-    if @draft.can_pick?
-      @draft.pick_champion([@champion]) 
-      redirect_to @draft
-    else
-      redirect_to @draft, notice: "Team Full"
-    end
-  end
   
   def unpick_champion
     @draft = set_draft

@@ -1,7 +1,7 @@
 
 <div class = "jumbotron">
 	<div class = "team_list">
-		<% if @draft.teams.first == @draft.team_turn %>	
+		<% if @draft.teams.first %>	
 		<div class = "picking_team">
 		<%else%>
 		<div class = "team">
@@ -9,7 +9,7 @@
 			<h1>Team 1</h1>
 			<%= render @draft.teams.first %>
 		</div>
-		<% if @draft.teams.last == @draft.team_turn %>	
+		<% if @draft.teams.last%>	
 		<div class = "picking_team">
 		<%else%>
 		<div class = "team">
@@ -18,14 +18,18 @@
 			<%= render @draft.teams.last %>
 		</div>
 	</div>
+	<%= @draft.picking_team %>
 </div>
 
 <div class = "remaining_champions">
 	<h1>Remaining Champions</h1>
 	<% @draft.champions.each do |champ|%>
 	<div>
-		<%= link_to champ.name, pick_champion_draft_champion_path(@draft, champ)%>
+		
 		<%= render champ %>
+		
+		<%= button_to 'Pick', champion_selections_path, {params: {:draft_id => @draft.id, :team_id => @draft.picking_team, :champion_id => champ.id, :picked => true}, method: :post}%>
+		<%= button_to 'Ban', champion_selections_path, {params: {:draft_id => @draft.id, :team_id => @draft.picking_team, :champion_id => champ.id, :picked => false}, method: :post}%></form>
 	</div>
 	<% end %>
 </div>

@@ -4,15 +4,16 @@ Rails.application.routes.draw do
     
     
 
-
+  resources :champion_selections, only: [:create]
   resources :drafts, only: [:show, :new, :destroy, :create, :update] do
     resources :champions, only: [] do
-      get 'pick_champion', on: :member
     end
     resources :teams, only: [] do
       get "clear_team",  on: :member
       resources :champions, only: [] do
           get 'unpick_champion', on: :member
+          get 'pick_champion', on: :member
+          get 'ban_champion', on: :member
       end
     end
   end

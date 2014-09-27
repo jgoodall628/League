@@ -1,13 +1,25 @@
 class Team < ActiveRecord::Base
   belongs_to :drafts
-  has_many :picks
-  has_many :bans
-  has_and_belongs_to_many :champions
-  def select champ
+  has_many :champion_selections
+  has_many :champions, through: :champion_selections
+  
+  def picked_champions
+    champions.where(champion_selections: { picked: true })
+  end
+  
+  def pick_champion champ
     
     champions << champ
     self.save  
+    selection = champion_selections.find_by(champion: champ)
+    selection.picked = true
+    selection.save
     
+    
+  end
+  def ban_champion champ
+    champions << champ
+    self.save 
   end
   def clear_team draft
     champions.each do |champ|
@@ -20,16 +32,17 @@ class Team < ActiveRecord::Base
     self.champions.delete(champ)
     self.save
   end
-  def bans
-    champions[0..2].nil? ? [] : champions[0..2]
-      
-      
+  def banned_champions
+    champions.where(champion_selections: { picked: false })      
   end
-  def picks
-    champions[3..8].nil? ? [] : champions[3..8]
+
+  def can_ban?
+    banned_champions.length < 3
   end
-  
+  def can_pick?
+    picked_champions.length < 5
+  end
   def team_full?
-    champions.length == 8
+    picks_full? && bans_full?
   end
 end

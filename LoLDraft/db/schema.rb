@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813235738) do
+ActiveRecord::Schema.define(version: 20140926215517) do
+
+  create_table "champion_selections", force: true do |t|
+    t.integer "team_id"
+    t.integer "champion_id"
+    t.boolean "picked",      default: false
+  end
 
   create_table "champions", force: true do |t|
     t.string   "name"
@@ -28,17 +34,9 @@ ActiveRecord::Schema.define(version: 20140813235738) do
   add_index "champions_drafts", ["champion_id"], name: "index_champions_drafts_on_champion_id"
   add_index "champions_drafts", ["draft_id"], name: "index_champions_drafts_on_draft_id"
 
-  create_table "champions_teams", force: true do |t|
-    t.integer "team_id"
-    t.integer "champion_id"
-  end
-
   create_table "drafts", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "picks", force: true do |t|
   end
 
   create_table "teams", force: true do |t|
