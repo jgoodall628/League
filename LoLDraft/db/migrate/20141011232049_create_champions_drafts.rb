@@ -1,8 +1,8 @@
 class CreateChampionsDrafts < ActiveRecord::Migration
   def change
     create_table :champions_drafts do |t|
-      t.belongs_to :draft, index: true
-      t.belongs_to :champion, index: true
+      t.integer "draft_id"
+      t.integer "champion_id"
     end
   end
 end
