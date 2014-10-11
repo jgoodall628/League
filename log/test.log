@@ -1,0 +1,206 @@
+  [1m[36m (1.2ms)[0m  [1mCREATE TABLE "champion_selections" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "team_id" integer, "champion_id" integer, "picked" boolean DEFAULT 'f') [0m
+  [1m[35m (1.1ms)[0m  CREATE TABLE "champions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "win_rate" float, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "champions_drafts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "draft_id" integer, "champion_id" integer) [0m
+  [1m[35m (0.4ms)[0m  select sqlite_version(*)
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX "index_champions_drafts_on_champion_id" ON "champions_drafts" ("champion_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_champions_drafts_on_champion_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_champions_drafts_on_champion_id' AND type='index'
+
+  [1m[36m (0.9ms)[0m  [1mCREATE  INDEX "index_champions_drafts_on_draft_id" ON "champions_drafts" ("draft_id")[0m
+  [1m[35m (1.1ms)[0m  CREATE TABLE "drafts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "teams" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "draft_id" integer) [0m
+  [1m[35m (1.0ms)[0m  CREATE  INDEX "index_teams_on_draft_id" ON "teams" ("draft_id")
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.9ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140926215517')
+  [1m[36m (0.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140629191751')[0m
+  [1m[35m (0.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140629192846')
+  [1m[36m (0.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140802022230')[0m
+  [1m[35m (0.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140802024458')
+  [1m[36m (0.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140802032038')[0m
+  [1m[35m (0.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140802211354')
+  [1m[36m (0.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140802220429')[0m
+  [1m[35m (0.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140806002715')
+  [1m[36m (0.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140806004040')[0m
+  [1m[35m (0.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140806005154')
+  [1m[36m (0.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140806011951')[0m
+  [1m[35m (0.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140806012049')
+  [1m[36m (0.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140806012357')[0m
+  [1m[35m (0.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140806012436')
+  [1m[36m (0.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140810204216')[0m
+  [1m[35m (0.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140810204941')
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140810205118')[0m
+  [1m[35m (1.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140812225015')
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140812225732')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140812230730')
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140812231007')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140813224109')
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140813235738')[0m
+  [1m[35m (0.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140922225246')
+  [1m[36m (0.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140922230854')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140922232806')
+  [1m[36m (0.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140922233520')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20140922233621')
+  [1m[36m (0.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20140925224817')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "champions"
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "champions" ("created_at", "updated_at", "id") VALUES ('2014-10-11 23:01:12', '2014-10-11 23:01:12', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "champions" ("created_at", "updated_at", "id") VALUES ('2014-10-11 23:01:12', '2014-10-11 23:01:12', 298486374)
+  [1m[36mFixture Delete (0.1ms)[0m  [1mDELETE FROM "drafts"[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "drafts" ("created_at", "updated_at", "id") VALUES ('2014-10-11 23:01:12', '2014-10-11 23:01:12', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "drafts" ("created_at", "updated_at", "id") VALUES ('2014-10-11 23:01:12', '2014-10-11 23:01:12', 298486374)[0m
+  [1m[35mFixture Delete (0.1ms)[0m  DELETE FROM "teams"
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "teams" ("id") VALUES (980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "teams" ("id") VALUES (298486374)
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+----------------------------------------------
+DraftsControllerTest: test_should_create_draft
+----------------------------------------------
+  [1m[36mDraft Load (0.3ms)[0m  [1mSELECT  "drafts".* FROM "drafts"  WHERE "drafts"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "drafts"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+-----------------------------------------------
+DraftsControllerTest: test_should_destroy_draft
+-----------------------------------------------
+  [1m[36mDraft Load (0.1ms)[0m  [1mSELECT  "drafts".* FROM "drafts"  WHERE "drafts"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "drafts"
+Processing by DraftsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mDraft Load (0.1ms)[0m  [1mSELECT  "drafts".* FROM "drafts"  WHERE "drafts"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Redirected to http://test.host/
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "drafts"
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+------------------------------------------
+DraftsControllerTest: test_should_get_edit
+------------------------------------------
+  [1m[36mDraft Load (0.1ms)[0m  [1mSELECT  "drafts".* FROM "drafts"  WHERE "drafts"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+-------------------------------------------
+DraftsControllerTest: test_should_get_index
+-------------------------------------------
+  [1m[35mDraft Load (0.1ms)[0m  SELECT  "drafts".* FROM "drafts"  WHERE "drafts"."id" = ? LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+-----------------------------------------
+DraftsControllerTest: test_should_get_new
+-----------------------------------------
+  [1m[36mDraft Load (0.1ms)[0m  [1mSELECT  "drafts".* FROM "drafts"  WHERE "drafts"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by DraftsController#new as HTML
+  [1m[35mDraft Load (0.1ms)[0m  SELECT "drafts".* FROM "drafts"
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "champions_drafts" WHERE "champions_drafts"."draft_id" = ?  [["draft_id", 298486374]]
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "drafts" WHERE "drafts"."id" = ?[0m  [["id", 298486374]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "champions_drafts" WHERE "champions_drafts"."draft_id" = ?  [["draft_id", 980190962]]
+  [1m[36mSQL (0.8ms)[0m  [1mDELETE FROM "drafts" WHERE "drafts"."id" = ?[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mTeam Load (0.1ms)[0m  [1mSELECT "teams".* FROM "teams"[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "teams" WHERE "teams"."id" = ?[0m  [["id", 298486374]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "teams" WHERE "teams"."id" = ?  [["id", 980190962]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mChampion Load (0.1ms)[0m  SELECT "champions".* FROM "champions"
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "drafts" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2014-10-11 23:01:12.855695"], ["updated_at", "2014-10-11 23:01:12.855695"]]
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "champions_drafts" ("champion_id", "draft_id") VALUES (?, ?)[0m  [["champion_id", 298486374], ["draft_id", 980190963]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "champions_drafts" ("champion_id", "draft_id") VALUES (?, ?)  [["champion_id", 980190962], ["draft_id", 980190963]]
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "teams" ("draft_id") VALUES (?)[0m  [["draft_id", 980190963]]
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "teams" ("draft_id") VALUES (?)  [["draft_id", 980190963]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/drafts/980190963
+Completed 302 Found in 41ms (ActiveRecord: 2.6ms)
+  [1m[35m (1.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+DraftsControllerTest: test_should_show_draft
+--------------------------------------------
+  [1m[35mDraft Load (0.1ms)[0m  SELECT  "drafts".* FROM "drafts"  WHERE "drafts"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by DraftsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mDraft Load (0.0ms)[0m  [1mSELECT  "drafts".* FROM "drafts"  WHERE "drafts"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35mTeam Load (0.2ms)[0m  SELECT  "teams".* FROM "teams"  WHERE "teams"."draft_id" = ?  ORDER BY "teams"."id" ASC LIMIT 1  [["draft_id", 980190962]]
+  [1m[36mTeam Load (0.0ms)[0m  [1mSELECT  "teams".* FROM "teams"  WHERE "teams"."draft_id" = ?  ORDER BY "teams"."id" ASC LIMIT 1[0m  [["draft_id", 980190962]]
+Completed 500 Internal Server Error in 18ms
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+----------------------------------------------
+DraftsControllerTest: test_should_update_draft
+----------------------------------------------
+  [1m[35mDraft Load (0.1ms)[0m  SELECT  "drafts".* FROM "drafts"  WHERE "drafts"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by DraftsController#update as HTML
+  Parameters: {"draft"=>{}, "id"=>"980190962"}
+  [1m[36mDraft Load (0.0ms)[0m  [1mSELECT  "drafts".* FROM "drafts"  WHERE "drafts"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/drafts/980190962
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+----------------------------------------------------
+ChampionsControllerTest: test_should_create_champion
+----------------------------------------------------
+  [1m[35mChampion Load (0.2ms)[0m  SELECT  "champions".* FROM "champions"  WHERE "champions"."id" = ? LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "champions"[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+-----------------------------------------------------
+ChampionsControllerTest: test_should_destroy_champion
+-----------------------------------------------------
+  [1m[35mChampion Load (0.1ms)[0m  SELECT  "champions".* FROM "champions"  WHERE "champions"."id" = ? LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "champions"[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+---------------------------------------------
+ChampionsControllerTest: test_should_get_edit
+---------------------------------------------
+  [1m[35mChampion Load (0.1ms)[0m  SELECT  "champions".* FROM "champions"  WHERE "champions"."id" = ? LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+----------------------------------------------
+ChampionsControllerTest: test_should_get_index
+----------------------------------------------
+  [1m[36mChampion Load (0.1ms)[0m  [1mSELECT  "champions".* FROM "champions"  WHERE "champions"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by ChampionsController#index as HTML
+  [1m[35mChampion Load (0.1ms)[0m  SELECT "champions".* FROM "champions"
+  Rendered champions/_champion.html.erb (0.7ms)
+  Rendered champions/_champion.html.erb (0.1ms)
+Completed 200 OK in 964ms (Views: 963.2ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+--------------------------------------------
+ChampionsControllerTest: test_should_get_new
+--------------------------------------------
+  [1m[36mChampion Load (0.1ms)[0m  [1mSELECT  "champions".* FROM "champions"  WHERE "champions"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+--------------------------------------------------
+ChampionsControllerTest: test_should_show_champion
+--------------------------------------------------
+  [1m[35mChampion Load (0.1ms)[0m  SELECT  "champions".* FROM "champions"  WHERE "champions"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by ChampionsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mChampion Load (0.1ms)[0m  [1mSELECT  "champions".* FROM "champions"  WHERE "champions"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35mChampion Load (0.0ms)[0m  SELECT  "champions".* FROM "champions"  WHERE "champions"."id" = ? LIMIT 1  [["id", 980190962]]
+Completed 200 OK in 5ms (Views: 3.5ms | ActiveRecord: 0.1ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+----------------------------------------------------
+ChampionsControllerTest: test_should_update_champion
+----------------------------------------------------
+  [1m[36mChampion Load (0.1ms)[0m  [1mSELECT  "champions".* FROM "champions"  WHERE "champions"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  rollback transaction
