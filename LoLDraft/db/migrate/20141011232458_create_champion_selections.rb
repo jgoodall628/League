@@ -1,9 +1,9 @@
 class CreateChampionSelections < ActiveRecord::Migration
   def change
     create_table :champion_selections do |t|
-      t.belongs_to :team
-      t.belongs_to :champion
-      t.boolean :picked, default: false
+      t.integer "team_id"
+      t.integer "champion_id"
+      t.boolean "picked"
     end
   end
 end
