@@ -13,41 +13,39 @@
  *= require_tree .
  *= require_self
  */
+@import "bourbon";
+@import "neat";
 
-.jumbotron {
-	border-style: solid;
-
-	margin: auto;
-	
-
-}
-.picking_team {
-	color: blue;
-	border-style: solid;
-	border-color: green;
-	
-	
-	width: 45%;
-	margin: auto;
+.container {
 	
 }
-.picking_team h1 {
+.teamlist {
+	@include outer-container;
+	
+}
+
+.team {
+	
+	@include span-columns(6);
+	@include omega();
+	text-align: center;
 	color: red;
 }
-.team {
-
-	border-style: solid;
-	border-color: green;
-	background-color: gray;
+.picks {
+	@include span-columns(3 of 6);
+	@include omega();
 	
-	width: 45%;
-	margin: auto;
 }
-.team h1 {
 
+.bans {
+	@include span-columns(3 of 6);
+	@include omega();
 }
 
 
 .remaining_champions {
-
+	@include span-columns(12);
+}
+.champion {
+	@include span-columns(2 of 12)
 }

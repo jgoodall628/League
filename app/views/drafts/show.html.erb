@@ -1,37 +1,26 @@
-
-<div class = "jumbotron">
+<div class = "container">
 	<div class = "team_list">
-		<% if @draft.teams.first %>	
-		<div class = "picking_team">
-		<%else%>
 		<div class = "team">
-		<% end %>
 			<h1>Team 1</h1>
 			<%= render @draft.teams.first %>
 		</div>
-		<% if @draft.teams.last%>	
-		<div class = "picking_team">
-		<%else%>
 		<div class = "team">
-		<% end %>
 			<h1>Team 2</h1>
 			<%= render @draft.teams.last %>
 		</div>
 	</div>
-	<%= @draft.picking_team %>
-</div>
-
-<div class = "remaining_champions">
-	<h1>Remaining Champions</h1>
-	<% @draft.champions.each do |champ|%>
-	<div>
-		
-		<%= render champ %>
-		
-		<%= button_to 'Pick', champion_selections_path, {params: {:draft_id => @draft.id, :team_id => @draft.picking_team, :champion_id => champ.id, :picked => true}, method: :post}%>
-		<%= button_to 'Ban', champion_selections_path, {params: {:draft_id => @draft.id, :team_id => @draft.picking_team, :champion_id => champ.id, :picked => false}, method: :post}%></form>
+	
+	<div class = "remaining_champions">
+		<h1>Remaining Champions</h1>
+		<% @draft.champions.each do |champ|%>
+		<div class = "champion" >
+			<%= render champ %>
+			
+			<%= button_to 'Pick', champion_selections_path, {params: {:draft_id => @draft.id, :team_id => @draft.picking_team, :champion_id => champ.id, :picked => true}, method: :post}%>
+			<%= button_to 'Ban', champion_selections_path, {params: {:draft_id => @draft.id, :team_id => @draft.picking_team, :champion_id => champ.id, :picked => false}, method: :post}%></form>
+		</div>
+		<% end %>
 	</div>
-	<% end %>
 </div>
 
 

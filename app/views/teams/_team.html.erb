@@ -1,16 +1,21 @@
+<div class = "bans">
 	<h2>bans</h2>
-		<% team.banned_champions.each do |champ|%>
-			<div>
-				<%= link_to champ.name, unpick_champion_draft_team_champion_path(team.draft_id, team, champ) %>
-			</div>
-			<%end%>
-			
+	<% team.banned_champions.each do |champ|%>
+		<div>
+			<%= link_to champ.name, unpick_champion_draft_team_champion_path(team.draft_id, team, champ) %>
+		</div>
+	<%end%>
+</div>
+<div class = "picks">
 	<h2>picks</h2>
-		<% team.picked_champions.each do |champ|%>
-			<div>
-				<%= link_to champ.name, unpick_champion_draft_team_champion_path(team.draft_id, team, champ) %>
-			</div>
-			<%end%>
+	<% team.picked_champions.each do |champ|%>
+		<div>
+			<%= link_to champ.name, unpick_champion_draft_team_champion_path(team.draft_id, team, champ) %>
+		</div>
+	<%end%>
+</div>
 			<div>
 				<%= link_to "Clear Team", clear_team_draft_team_path(team.draft_id, team)%>
 			</div>
+			
+
