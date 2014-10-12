@@ -17,19 +17,22 @@
 @import "neat";
 
 .container {
-	
+	@include outer-container();
 }
-.teamlist {
-	@include outer-container;
-	
+.team_list {
+	@include span-columns(12);
+	height: 250px;
 }
-
+.clear_team {
+	@include span-columns(6 of 6);
+	text-align: center;
+	@include omega();
+}
 .team {
-	
-	@include span-columns(6);
+	@include span-columns(6 of 12);
 	@include omega();
 	text-align: center;
-	color: red;
+	background-color: silver;
 }
 .picks {
 	@include span-columns(3 of 6);
@@ -44,8 +47,10 @@
 
 
 .remaining_champions {
-	@include span-columns(12);
+	
 }
 .champion {
-	@include span-columns(2 of 12)
+	@include span-columns(3 of 12);
+	@include omega();
+	background-color: silver;
 }
