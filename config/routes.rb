@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :champion_selections, only: [:create]
   resources :drafts, only: [:show, :new, :destroy, :create, :update] do
+    resources :picks, only: [:new]
     resources :champions, only: [] do
     end
     resources :teams, only: [] do

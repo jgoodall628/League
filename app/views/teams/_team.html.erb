@@ -1,5 +1,5 @@
 <div class = "bans">
-	<h2>bans</h2>
+	<h2>Bans</h2>
 	<% team.banned_champions.each do |champ|%>
 		<div>
 			<%= link_to champ.name, unpick_champion_draft_team_champion_path(team.draft_id, team, champ) %>
@@ -7,7 +7,7 @@
 	<%end%>
 </div>
 <div class = "picks">
-	<h2>picks</h2>
+	<h2>Picks</h2>
 	<% team.picked_champions.each do |champ|%>
 		<div>
 			<%= link_to champ.name, unpick_champion_draft_team_champion_path(team.draft_id, team, champ) %>
